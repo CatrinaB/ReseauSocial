@@ -7,18 +7,15 @@ package reseausocial;
 
 /**
  *
- * @author Mara
+ * @author Catrina
  */
 public class Admin {
     private int ID;
-
-    public int getID() {
-        return ID;
+    
+    public Admin(int id){
+        this.ID = id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
     
     public void ajouterProfesseur(Professeur professeur) {
         
@@ -43,4 +40,6 @@ public class Admin {
     public void effacerEtudiant(int ID) {
         
     }
+    
+    public String toString(){return "";}
 }
