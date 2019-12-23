@@ -6,6 +6,7 @@
 package reseausocial;
 
 import java.util.ArrayList;
+import javafx.util.Pair;
 
 /**
  *
@@ -22,6 +23,13 @@ public class Utilisateur {
     private String adresse;
     private ArrayList<Utilisateur> amis;
     private String type;
+
+    
+    public Utilisateur(String username, String motDePasse) {
+        this.username = username;
+        this.motDePasse = motDePasse;
+        this.ID = (int)(Math.random() * 10000);
+    }
 
     public int getID() {
         return ID;
@@ -103,8 +111,20 @@ public class Utilisateur {
         this.type = type;
     }
     
-    public void seConnecter(String username, String motDePasse) {
+    public void seConnecter() {
+        ArrayList<Pair> users = new ArrayList<>();
+        Pair<String, String> p1 = new Pair("Catrina", "abc123");
+        Pair<String, String> p2 = new Pair("maria", "12345678");
+        Pair<String, String> p3 = new Pair("Mara", "moonmoon");
+        users.add(p1);
+        users.add(p2);
+        users.add(p3);
         
+        Pair<String, String> checkUser = new Pair(this.username, this.motDePasse);
+        if(users.contains(checkUser))
+            System.out.println("good user");
+        else
+            System.out.println("bad user");
     }
     
     public void seDeconnecter() {
