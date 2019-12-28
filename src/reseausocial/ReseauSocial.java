@@ -21,8 +21,8 @@ public class ReseauSocial {
         u1.seConnecter();
         u2.seConnecter();
         
-        System.out.println(u1.getID());
-        System.out.println(u2.getID());
+        //System.out.println(u1.getID());
+        //System.out.println(u2.getID());
     }
     
 }

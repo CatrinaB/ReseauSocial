@@ -6,7 +6,7 @@
 package reseausocial;
 
 import java.util.ArrayList;
-import javafx.util.Pair;
+import java.util.Objects;
 
 /**
  *
@@ -112,19 +112,14 @@ public class Utilisateur {
     }
     
     public void seConnecter() {
-        ArrayList<Pair> users = new ArrayList<>();
-        Pair<String, String> p1 = new Pair("Catrina", "abc123");
-        Pair<String, String> p2 = new Pair("maria", "12345678");
-        Pair<String, String> p3 = new Pair("Mara", "moonmoon");
-        users.add(p1);
-        users.add(p2);
-        users.add(p3);
+        BDUtilisateurs baseDonnees = BDUtilisateurs.getInstance();
         
-        Pair<String, String> checkUser = new Pair(this.username, this.motDePasse);
-        if(users.contains(checkUser))
-            System.out.println("good user");
+        if(baseDonnees.contientUtilisateur(this))
+            System.out.println("Bienvenu(e), " + this.username + "!");
         else
-            System.out.println("bad user");
+            System.out.println("Desolée, vous n'avez encore un compte. S'il "
+                    + "vous plaît contactez votre chef d'année pour résoudre "
+                    + "le problème.");
     }
     
     public void seDeconnecter() {
@@ -150,4 +145,27 @@ public class Utilisateur {
     public void changerPhotoProfil() {
         
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Utilisateur other = (Utilisateur) obj;
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        if (!Objects.equals(this.motDePasse, other.motDePasse)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
