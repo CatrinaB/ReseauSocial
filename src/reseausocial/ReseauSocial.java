@@ -15,7 +15,14 @@ public class ReseauSocial {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Utilisateur u1 = new Utilisateur("Catrina", "abc123");
+        Utilisateur u2 = new Utilisateur("aaa", "sss");
+        
+        u1.seConnecter();
+        u2.seConnecter();
+        
+        //System.out.println(u1.getID());
+        //System.out.println(u2.getID());
     }
     
 }

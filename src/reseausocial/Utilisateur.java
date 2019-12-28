@@ -6,6 +6,7 @@
 package reseausocial;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -22,6 +23,13 @@ public class Utilisateur {
     private String adresse;
     private ArrayList<Utilisateur> amis;
     private String type;
+
+    
+    public Utilisateur(String username, String motDePasse) {
+        this.username = username;
+        this.motDePasse = motDePasse;
+        this.ID = (int)(Math.random() * 10000);
+    }
 
     public int getID() {
         return ID;
@@ -103,8 +111,15 @@ public class Utilisateur {
         this.type = type;
     }
     
-    public void seConnecter(String username, String motDePasse) {
+    public void seConnecter() {
+        BDUtilisateurs baseDonnees = BDUtilisateurs.getInstance();
         
+        if(baseDonnees.contientUtilisateur(this))
+            System.out.println("Bienvenu(e), " + this.username + "!");
+        else
+            System.out.println("Desolée, vous n'avez encore un compte. S'il "
+                    + "vous plaît contactez votre chef d'année pour résoudre "
+                    + "le problème.");
     }
     
     public void seDeconnecter() {
@@ -130,4 +145,27 @@ public class Utilisateur {
     public void changerPhotoProfil() {
         
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Utilisateur other = (Utilisateur) obj;
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        if (!Objects.equals(this.motDePasse, other.motDePasse)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
