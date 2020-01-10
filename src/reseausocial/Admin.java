@@ -11,7 +11,7 @@ package reseausocial;
  */
 public class Admin {
     private int ID;
-    private BDUtilisateurs conn = BDUtilisateurs.getInstance();
+    private CollectionUtilisateurs conn = CollectionUtilisateurs.getInstance();
 
     public Admin(int ID) {
         this.ID = ID;

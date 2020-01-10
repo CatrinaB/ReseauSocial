@@ -27,6 +27,7 @@ public class Utilisateur {
     private ArrayList<Message> messagesRecus = new ArrayList<>();
     private ArrayList<Integer> demandesEnvoyes = new ArrayList<>();
     private ArrayList<Integer> demandesRecues = new ArrayList<>();    
+    private ArrayList<Post> posts = new ArrayList<>();
     
     public Utilisateur(int ID, String username, String motDePasse) {
         this.username = username;
@@ -113,8 +114,8 @@ public class Utilisateur {
         this.amis = amis;
     }
 
-    public String getType() {
-        return type.toString();
+    public TypeUtilisateur getType() {
+        return type;
     }
 
     public void setType(TypeUtilisateur type) {
@@ -126,7 +127,7 @@ public class Utilisateur {
     }
     
     public boolean seConnecter() {
-        BDUtilisateurs baseDonnees = BDUtilisateurs.getInstance();
+        CollectionUtilisateurs baseDonnees = CollectionUtilisateurs.getInstance();
         
         if(baseDonnees.contientUtilisateur(this)){
             System.out.println("Bienvenu(e), " + this.username + "!");
@@ -177,7 +178,7 @@ public class Utilisateur {
     }
     
     public void envoyerDemandeAmi(int ID) {
-        BDUtilisateurs conn = BDUtilisateurs.getInstance();
+        CollectionUtilisateurs conn = CollectionUtilisateurs.getInstance();
         
         Utilisateur u = conn.getUtilisateur(ID);
         u.recevoirDemandeAmi(ID);
@@ -201,7 +202,7 @@ public class Utilisateur {
     }
     
     public void envoyerMessage(Message message){
-        BDUtilisateurs conn = BDUtilisateurs.getInstance();
+        CollectionUtilisateurs conn = CollectionUtilisateurs.getInstance();
         
         Utilisateur u = conn.getUtilisateur(message.getaQui());
         u.recevoirMessage(message);
@@ -222,6 +223,10 @@ public class Utilisateur {
     
     private void addMessageEnvoye(Message message) {
         this.messagesEnvoyes.add(message);
+    }
+    
+    public void ajouterPost(Post post) {
+        this.posts.add(post);
     }
 
     @Override

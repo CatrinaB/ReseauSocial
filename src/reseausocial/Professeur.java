@@ -10,7 +10,6 @@ package reseausocial;
  * @author Mara
  */
 public class Professeur extends Utilisateur {
-    private int ID;
     private String departement;
 
     public Professeur(String departement, int ID, String username, String motDePasse) {
@@ -19,20 +18,18 @@ public class Professeur extends Utilisateur {
         super.setType(TypeUtilisateur.PROFESSEUR);
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
     public String getDepartement() {
         return departement;
     }
 
     public void setDepartement(String departement) {
         this.departement = departement;
+    }
+    
+    @Override
+    public String toString(){
+        return super.getUsername() + " " + super.getID() + " " +
+                super.getMotDePasse() + " " + this.getDepartement();
     }
     
 }
