@@ -13,6 +13,16 @@ public class Fichier {
     private int ID;
     private String nomFichier;
 
+    public Fichier(int ID, String nomFichier) {
+        this.ID = ID;
+        this.nomFichier = nomFichier;
+    }
+    
+    public Fichier(String nomFichier) {
+        this.ID = (int)(Math.random() * 10);
+        this.nomFichier = nomFichier;
+    }
+
     public int getID() {
         return ID;
     }

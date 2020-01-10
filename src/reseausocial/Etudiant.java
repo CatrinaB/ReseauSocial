@@ -9,9 +9,14 @@ package reseausocial;
  *
  * @author Mara
  */
-public class Etudiant {
+public class Etudiant extends Utilisateur {
     private int ID;
     private String groupe;
+
+    public Etudiant(String groupe, int ID, String username, String motDePasse) {
+        super(ID, username, motDePasse);
+        this.groupe = groupe;
+    }
 
     public int getID() {
         return ID;

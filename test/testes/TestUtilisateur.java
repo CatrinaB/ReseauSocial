@@ -5,15 +5,18 @@
  */
 package testes;
 
+import java.util.ArrayList;
 import static junit.framework.Assert.*;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertArrayEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import reseausocial.BDUtilisateurs;
+import reseausocial.Message;
+import reseausocial.Texte;
 import reseausocial.Utilisateur;
-
-
 
 /**
  *
@@ -22,6 +25,8 @@ import reseausocial.Utilisateur;
 public class TestUtilisateur {
     
     String goodUser, goodUser2, badUser, goodPass, badPass;
+    Utilisateur u1, u2, u3;
+    BDUtilisateurs bd;
     
     public TestUtilisateur() {
     }
@@ -41,6 +46,8 @@ public class TestUtilisateur {
         goodUser2 = "maria";
         goodPass = "abc123";
         badPass = "nuasta";
+        
+        bd = BDUtilisateurs.getInstance();
     }
     
     @After
@@ -49,13 +56,49 @@ public class TestUtilisateur {
     
     @Test
     public void loginTest(){
-        Utilisateur u1 = new Utilisateur(goodUser, goodPass);
-        Utilisateur u2 = new Utilisateur(goodUser2, badPass);
-        Utilisateur u3 = new Utilisateur(badUser, goodPass);
+        Utilisateur t1 = new Utilisateur(goodUser, goodPass);
+        Utilisateur t2 = new Utilisateur(goodUser2, badPass);
+        Utilisateur t3 = new Utilisateur(badUser, goodPass);
         
-        assertTrue(u1.seConnecter());
-        assertFalse(u2.seConnecter());
-        assertFalse(u3.seConnecter());
+        assertTrue(t1.seConnecter());
+        assertFalse(t2.seConnecter());
+        assertFalse(t3.seConnecter());
     }
     
+    @Test
+    public void messageTest(){
+        Message mess = new Message(12, 3, 1, new Texte("testjunit"));
+        
+        u3 = bd.getUtilisateur(3);
+        u3.envoyerMessage(mess);
+        
+        u1 = bd.getUtilisateur(1);
+        u2 = bd.getUtilisateur(2);
+        u3 = bd.getUtilisateur(3);
+        
+        assertEquals(u1.getMessagesRecus().size(), 1);
+        assertEquals(u3.getMessagesEnvoyes().size(), 1);
+        assertFalse(u2.getMessagesEnvoyes().size() == 1);
+    }
+    
+    @Test
+    public void demandeAmiTest(){
+        u1 = bd.getUtilisateur(1);
+        
+        u1.envoyerDemandeAmi(2);
+        u1.envoyerDemandeAmi(3);
+        
+        u2 = bd.getUtilisateur(2);
+        u3 = bd.getUtilisateur(3);
+        u1 = bd.getUtilisateur(1);
+        
+        ArrayList<Integer> al = (ArrayList<Integer>) u1.getDemandesEnvoyes().clone();
+        Object[] arr = al.toArray();
+        Object[] arr2 = {2, 3};
+        
+        assertEquals(u2.getDemandesRecues().size(), 1);
+        assertEquals(u3.getDemandesRecues().size(), 1);
+        assertEquals(u1.getDemandesEnvoyes().size(), 2);
+        assertArrayEquals(arr2, arr);
+    }
 }

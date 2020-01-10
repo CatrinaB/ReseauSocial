@@ -40,8 +40,13 @@ public class BDUtilisateurs {
         return instanceBDUtilisateurs;
     }
     
-    public void ajouterUtilisateur(Utilisateur utilisateur) {
-        
+    public boolean ajouterUtilisateur(Utilisateur utilisateur) {
+        for(int i = 0; i < this.utilisateurs.size(); i++)
+            if(this.utilisateurs.get(i).getID() == utilisateur.getID() || 
+                    this.utilisateurs.get(i).getUsername() == utilisateur.getUsername())
+                return false;
+        this.utilisateurs.add(utilisateur);
+        return true;
     }
     
     public boolean contientUtilisateur(Utilisateur u){
@@ -65,23 +70,43 @@ public class BDUtilisateurs {
         }
     }
     
-    public void creerAdmin(Admin admin) {
-        
+//    public void creerAdmin(Admin admin) {
+//        
+//    }
+//    
+//    public void eliminerAdmin(Admin admin) {
+//        
+//    }
+    
+    public boolean effacerUtilisateur(int ID) {
+        for(int i = 0; i < this.utilisateurs.size(); i++){
+            if (this.utilisateurs.get(i).getID() == ID){
+                this.utilisateurs.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
     
-    public void eliminerAdmin(Admin admin) {
-        
-    }
-    
-    public void effacerUtilisateur(int ID) {
-        
+    public int getBDSize(){
+        return this.utilisateurs.size();
     }
     
     @Override
     public String toString(){
         String str="";
-        for(int i = 0; i < this.utilisateurs.size(); i++)
-            str += utilisateurs.get(i).getUsername() +  " ";
+        ArrayList<Message> messRec, messEnv;
+        for(int i = 0; i < this.utilisateurs.size(); i++){
+            str += utilisateurs.get(i).getUsername() +  "\n";//System.out.println(str);
+            messRec = (ArrayList<Message>) utilisateurs.get(i).getMessagesRecus().clone();
+            for (int j = 0; j < messRec.size(); j++){
+                str += "recu " + messRec.get(j).toString();
+            }
+            messEnv = (ArrayList<Message>) utilisateurs.get(i).getMessagesEnvoyes().clone();
+            for (int j = 0; j < messEnv.size(); j++){
+                str += "envoye " + messEnv.get(j).toString();
+            }
+        }
         return str;
     }
 }

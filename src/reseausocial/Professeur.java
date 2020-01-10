@@ -9,9 +9,15 @@ package reseausocial;
  *
  * @author Mara
  */
-public class Professeur {
+public class Professeur extends Utilisateur {
     private int ID;
     private String departement;
+
+    public Professeur(String departement, int ID, String username, String motDePasse) {
+        super(ID, username, motDePasse);
+        this.departement = departement;
+        super.setType(TypeUtilisateur.PROFESSEUR);
+    }
 
     public int getID() {
         return ID;
