@@ -111,15 +111,18 @@ public class Utilisateur {
         this.type = type;
     }
     
-    public void seConnecter() {
+    public boolean seConnecter() {
         BDUtilisateurs baseDonnees = BDUtilisateurs.getInstance();
         
-        if(baseDonnees.contientUtilisateur(this))
+        if(baseDonnees.contientUtilisateur(this)){
             System.out.println("Bienvenu(e), " + this.username + "!");
+            return true;
+        }
         else
             System.out.println("Desolée, vous n'avez encore un compte. S'il "
                     + "vous plaît contactez votre chef d'année pour résoudre "
                     + "le problème.");
+        return false;
     }
     
     public void seDeconnecter() {
