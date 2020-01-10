@@ -13,9 +13,13 @@ import static org.junit.Assert.assertArrayEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import reseausocial.BDUtilisateurs;
+import reseausocial.CollectionUtilisateurs;
+import reseausocial.Etudiant;
 import reseausocial.Message;
+import reseausocial.Professeur;
 import reseausocial.Texte;
+import static reseausocial.TypeUtilisateur.ETUDIANT;
+import static reseausocial.TypeUtilisateur.PROFESSEUR;
 import reseausocial.Utilisateur;
 
 /**
@@ -26,7 +30,7 @@ public class TestUtilisateur {
     
     String goodUser, goodUser2, badUser, goodPass, badPass;
     Utilisateur u1, u2, u3;
-    BDUtilisateurs bd;
+    CollectionUtilisateurs bd;
     
     public TestUtilisateur() {
     }
@@ -47,7 +51,7 @@ public class TestUtilisateur {
         goodPass = "abc123";
         badPass = "nuasta";
         
-        bd = BDUtilisateurs.getInstance();
+        bd = CollectionUtilisateurs.getInstance();
     }
     
     @After
@@ -100,5 +104,14 @@ public class TestUtilisateur {
         assertEquals(u3.getDemandesRecues().size(), 1);
         assertEquals(u1.getDemandesEnvoyes().size(), 2);
         assertArrayEquals(arr2, arr);
+    }
+    
+    @Test
+    public void typeTest(){
+        Etudiant e = new Etudiant("1240F", 5, "elev", "paaaroolaaa");
+        Professeur p = new Professeur("physique", 8, "prof", "pass");
+        
+        assertEquals(ETUDIANT,e.getType());
+        assertEquals(PROFESSEUR, p.getType());
     }
 }

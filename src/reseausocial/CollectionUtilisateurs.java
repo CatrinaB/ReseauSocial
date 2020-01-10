@@ -19,8 +19,8 @@ import java.util.ArrayList;
  * elle n'existe pas déjà.
  * @author Catrina
  */
-public class BDUtilisateurs {
-    private static BDUtilisateurs instanceBDUtilisateurs;
+public class CollectionUtilisateurs {
+    private static CollectionUtilisateurs instanceBDUtilisateurs;
     private ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
         
     Utilisateur u1 = new Utilisateur(1, "Catrina", "abc123");
@@ -28,15 +28,15 @@ public class BDUtilisateurs {
     Utilisateur u3 = new Utilisateur(3, "Mara", "moonmoon");
 
 
-    private BDUtilisateurs() {
+    private CollectionUtilisateurs() {
         utilisateurs.add(u1);
         utilisateurs.add(u2);
         utilisateurs.add(u3);
     }
     
-    public static BDUtilisateurs getInstance(){
+    public static CollectionUtilisateurs getInstance(){
         if(instanceBDUtilisateurs == null)
-            instanceBDUtilisateurs = new BDUtilisateurs();
+            instanceBDUtilisateurs = new CollectionUtilisateurs();
         return instanceBDUtilisateurs;
     }
     

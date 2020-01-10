@@ -21,6 +21,14 @@ public class Post {
     private Contenu contenu;
     private ArrayList<Utilisateur> aimePar;
 
+    public Post(int ID, Utilisateur utilisateur, Date date, Date heure, Contenu contenu) {
+        this.ID = ID;
+        this.utilisateur = utilisateur;
+        this.date = date;
+        this.heure = heure;
+        this.contenu = contenu;
+    }
+
     public int getID() {
         return ID;
     }
@@ -75,10 +83,6 @@ public class Post {
 
     public void setAimePar(ArrayList<Utilisateur> aimePar) {
         this.aimePar = aimePar;
-    }
-    
-    public void ajouterPost(Post post) {
-        
     }
     
     public void editerPost(Post post) {

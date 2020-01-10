@@ -15,7 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import reseausocial.BDUtilisateurs;
+import reseausocial.CollectionUtilisateurs;
 import reseausocial.Utilisateur;
 
 /**
@@ -25,7 +25,7 @@ import reseausocial.Utilisateur;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestBD {
     
-    BDUtilisateurs bd;
+    CollectionUtilisateurs bd;
     
     public TestBD() {
     }
@@ -40,7 +40,7 @@ public class TestBD {
     
     @Before
     public void setUp() {
-        bd = BDUtilisateurs.getInstance();
+        bd = CollectionUtilisateurs.getInstance();
     }
     
     @After

@@ -83,20 +83,12 @@ public class Message {
         this.lu = lu;
     }
     
-    public void envoyerMessage(Utilisateur deQui, Utilisateur aQui, Contenu contenu) {
-        
-    }
-    
-    public void recevoirMessage(Utilisateur deQui, Utilisateur aQui, Contenu contenu) {
-        
-    }
-    
-    public boolean messageLu(Utilisateur deQui, Utilisateur aQui, Contenu contenu) {
+    public boolean messageLu(int deQui, int aQui, Contenu contenu) {
         
         return true;
     }
     
-    public void effacerMessage(Utilisateur deQui, Utilisateur aQui, Contenu contenu) {
+    public void effacerMessage(int ID) {
         
     }
     
