@@ -25,10 +25,16 @@ public class Utilisateur {
     private String type;
 
     
+    public Utilisateur(int ID, String username, String motDePasse) {
+        this.username = username;
+        this.motDePasse = motDePasse;
+        this.ID = ID;
+    }
+    
     public Utilisateur(String username, String motDePasse) {
         this.username = username;
         this.motDePasse = motDePasse;
-        this.ID = (int)(Math.random() * 10000);
+        this.ID = (int)(Math.random() * 10);
     }
 
     public int getID() {
@@ -131,7 +137,15 @@ public class Utilisateur {
     }
     
     public void editInfo(Utilisateur utilisateur) {
-        
+        this.setUsername(utilisateur.username);
+        this.setAdresse(utilisateur.adresse);
+        this.setAmis(utilisateur.amis);
+        this.setEmail(utilisateur.email);
+        this.setMotDePasse(utilisateur.motDePasse);
+        this.setNom(utilisateur.nom);
+        this.setPrenom(utilisateur.prenom);
+        this.setTelephone(utilisateur.telephone);
+        this.setType(utilisateur.type);
     }
     
     public void voirInfo(Utilisateur utilisateur) { 
