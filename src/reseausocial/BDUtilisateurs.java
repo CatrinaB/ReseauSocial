@@ -80,8 +80,18 @@ public class BDUtilisateurs {
     @Override
     public String toString(){
         String str="";
-        for(int i = 0; i < this.utilisateurs.size(); i++)
-            str += utilisateurs.get(i).getUsername() +  " ";
+        ArrayList<Message> messRec, messEnv;
+        for(int i = 0; i < this.utilisateurs.size(); i++){
+            str += utilisateurs.get(i).getUsername() +  "\n";//System.out.println(str);
+            messRec = (ArrayList<Message>) utilisateurs.get(i).getMessagesRecus().clone();
+            for (int j = 0; j < messRec.size(); j++){
+                str += "recu " + messRec.get(j).toString();
+            }
+            messEnv = (ArrayList<Message>) utilisateurs.get(i).getMessagesEnvoyes().clone();
+            for (int j = 0; j < messEnv.size(); j++){
+                str += "envoye " + messEnv.get(j).toString();
+            }
+        }
         return str;
     }
 }

@@ -11,6 +11,7 @@ package reseausocial;
  */
 public class Admin {
     private int ID;
+    private BDUtilisateurs conn = BDUtilisateurs.getInstance();
 
     public int getID() {
         return ID;
@@ -21,11 +22,11 @@ public class Admin {
     }
     
     public void ajouterProfesseur(Professeur professeur) {
-        
+        conn.ajouterUtilisateur(professeur);
     }
     
     public void ajouterEtudiant(Etudiant etudiant) {
-        
+        conn.ajouterUtilisateur(etudiant);
     }
     
     public void creerAdmin(Admin admin) {
@@ -37,10 +38,10 @@ public class Admin {
     }
     
     public void effacerProfesseur(int ID) {
-        
+        conn.effacerUtilisateur(ID);
     }
     
     public void effacerEtudiant(int ID) {
-        
+        conn.effacerUtilisateur(ID);
     }
 }

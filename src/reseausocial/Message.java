@@ -13,12 +13,19 @@ import java.util.Date;
  */
 public class Message {
     private int ID;
-    private Utilisateur deQui;
-    private Utilisateur aQui;
+    private int deQui;
+    private int aQui;
     private Contenu contenu;
     private Date date;
     private Date heure;
     private boolean lu;
+
+    public Message(int ID, int deQui, int aQui, Contenu contenu) {
+        this.ID = ID;
+        this.deQui = deQui;
+        this.aQui = aQui;
+        this.contenu = contenu;
+    }
 
     public int getID() {
         return ID;
@@ -28,19 +35,19 @@ public class Message {
         this.ID = ID;
     }
 
-    public Utilisateur getDeQui() {
+    public int getDeQui() {
         return deQui;
     }
 
-    public void setDeQui(Utilisateur deQui) {
+    public void setDeQui(int deQui) {
         this.deQui = deQui;
     }
 
-    public Utilisateur getaQui() {
+    public int getaQui() {
         return aQui;
     }
 
-    public void setaQui(Utilisateur aQui) {
+    public void setaQui(int aQui) {
         this.aQui = aQui;
     }
 
@@ -91,5 +98,10 @@ public class Message {
     
     public void effacerMessage(Utilisateur deQui, Utilisateur aQui, Contenu contenu) {
         
+    }
+    
+    @Override
+    public String toString(){
+        return "message de " + this.deQui + " a " + this.aQui + "\n";
     }
 }

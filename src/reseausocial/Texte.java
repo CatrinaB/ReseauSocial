@@ -9,8 +9,12 @@ package reseausocial;
  *
  * @author Mara
  */
-public class Texte {
+public class Texte extends Contenu {
     private String texte;
+
+    public Texte(String texte) {
+        this.texte = texte;
+    }
 
     public String getTexte() {
         return texte;

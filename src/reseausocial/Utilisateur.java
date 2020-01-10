@@ -22,13 +22,17 @@ public class Utilisateur {
     private String telephone;
     private String adresse;
     private ArrayList<Utilisateur> amis;
-    private String type;
-
+    private TypeUtilisateur type;
+    private ArrayList<Message> messagesEnvoyes = new ArrayList<>();
+    private ArrayList<Message> messagesRecus = new ArrayList<>();
+    private ArrayList<Integer> demandesEnvoyes = new ArrayList<>();
+    private ArrayList<Integer> demandesRecues = new ArrayList<>();    
     
     public Utilisateur(int ID, String username, String motDePasse) {
         this.username = username;
         this.motDePasse = motDePasse;
         this.ID = ID;
+        this.type = TypeUtilisateur.ETUDIANT;
     }
     
     public Utilisateur(String username, String motDePasse) {
@@ -110,11 +114,15 @@ public class Utilisateur {
     }
 
     public String getType() {
-        return type;
+        return type.toString();
     }
 
-    public void setType(String type) {
+    public void setType(TypeUtilisateur type) {
         this.type = type;
+    }
+    
+    public void recevoirMessage(Message message) {
+        this.messagesRecus.add(message);
     }
     
     public boolean seConnecter() {
@@ -132,11 +140,15 @@ public class Utilisateur {
     }
     
     public void seDeconnecter() {
-        
+        System.out.println("Vous avez été déconnecté(e)!");
     }
     
-    public void changerMotDePasse(String username, String ancienMotDePasse, String nouveauMotDePasse) {
-        
+    public void changerMotDePasse(String ancienMotDePasse, String nouveauMotDePasse) {
+        if(nouveauMotDePasse != ancienMotDePasse) {
+            this.setMotDePasse(nouveauMotDePasse);
+        } else {
+            System.out.println("New password can't be the same as old password!");
+        }
     }
     
     public void editInfo(Utilisateur utilisateur) {
@@ -151,16 +163,65 @@ public class Utilisateur {
         this.setType(utilisateur.type);
     }
     
-    public void voirInfo(Utilisateur utilisateur) { 
-        
+    public String voirInfo(Utilisateur utilisateur) { 
+        return utilisateur.getNom() + " " + utilisateur.getPrenom() + ", email " +
+                utilisateur.getEmail() + ", tel. " + utilisateur.getTelephone();
+    }
+
+    public ArrayList<Integer> getDemandesEnvoyes() {
+        return demandesEnvoyes;
+    }
+
+    public ArrayList<Integer> getDemandesRecues() {
+        return demandesRecues;
     }
     
-    public void envoyerDemandeAmi(Utilisateur utilisateur) {
+    public void envoyerDemandeAmi(int ID) {
+        BDUtilisateurs conn = BDUtilisateurs.getInstance();
         
+        Utilisateur u = conn.getUtilisateur(ID);
+        u.recevoirDemandeAmi(ID);
+        conn.updateUtilisateur(u);
+        
+        u = conn.getUtilisateur(this.ID);
+        u.ajouterDemandeEnvoyee(ID);
+        conn.updateUtilisateur(u);
+    }
+    
+    public void recevoirDemandeAmi(int ID){
+        this.demandesRecues.add(ID);
+    }
+    
+    private void ajouterDemandeEnvoyee(int ID){
+        this.demandesEnvoyes.add(ID);
     }
     
     public void changerPhotoProfil() {
         
+    }
+    
+    public void envoyerMessage(Message message){
+        BDUtilisateurs conn = BDUtilisateurs.getInstance();
+        
+        Utilisateur u = conn.getUtilisateur(message.getaQui());
+        u.recevoirMessage(message);
+        conn.updateUtilisateur(u);
+        
+        Utilisateur u2 = conn.getUtilisateur(message.getDeQui());
+        u2.addMessageEnvoye(message);
+        conn.updateUtilisateur(u2);
+    }
+
+    public ArrayList<Message> getMessagesEnvoyes() {
+        return messagesEnvoyes;
+    }
+
+    public ArrayList<Message> getMessagesRecus() {
+        return messagesRecus;
+    }
+    
+    private void addMessageEnvoye(Message message) {
+        this.messagesEnvoyes.add(message);
     }
 
     @Override
