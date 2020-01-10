@@ -21,15 +21,14 @@ import java.util.ArrayList;
  */
 public class BDUtilisateurs {
     private static BDUtilisateurs instanceBDUtilisateurs;
-    private ArrayList<Utilisateur> utilisateurs;
+    private ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
+        
+    Utilisateur u1 = new Utilisateur(1, "Catrina", "abc123");
+    Utilisateur u2 = new Utilisateur(2, "maria", "12345678");
+    Utilisateur u3 = new Utilisateur(3, "Mara", "moonmoon");
+
 
     private BDUtilisateurs() {
-        this.utilisateurs = new ArrayList<>();
-        
-        Utilisateur u1 = new Utilisateur("Catrina", "abc123");
-        Utilisateur u2 = new Utilisateur("maria", "12345678");
-        Utilisateur u3 = new Utilisateur("Mara", "moonmoon");
-        
         utilisateurs.add(u1);
         utilisateurs.add(u2);
         utilisateurs.add(u3);
@@ -49,6 +48,21 @@ public class BDUtilisateurs {
         if(this.utilisateurs.contains(u))
             return true;
         return false;
+    }
+    
+    public Utilisateur getUtilisateur(int ID){
+        for(int i = 0; i < this.utilisateurs.size(); i++){
+            if (this.utilisateurs.get(i).getID() == ID)
+                return this.utilisateurs.get(i);
+        }
+        return null;
+    }
+    
+    public void updateUtilisateur(Utilisateur u) {
+        for(int i = 0; i < this.utilisateurs.size(); i++){
+            if (this.utilisateurs.get(i).getID() == u.getID())
+                this.utilisateurs.get(i).editInfo(u);
+        }
     }
     
     public void creerAdmin(Admin admin) {

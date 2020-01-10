@@ -9,6 +9,6 @@ package reseausocial;
  *
  * @author Mara
  */
-public class Contenu {
+public abstract class Contenu {
     
 }
