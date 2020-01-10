@@ -13,6 +13,10 @@ public class Admin {
     private int ID;
     private BDUtilisateurs conn = BDUtilisateurs.getInstance();
 
+    public Admin(int ID) {
+        this.ID = ID;
+    }
+
     public int getID() {
         return ID;
     }

@@ -18,8 +18,6 @@ import reseausocial.Message;
 import reseausocial.Texte;
 import reseausocial.Utilisateur;
 
-
-
 /**
  *
  * @author Catrina

@@ -15,6 +15,24 @@ public class Groupe {
     private int ID;
     private String nom;
     private ArrayList<Utilisateur> membres;
+
+    public Groupe(int ID, String nom, ArrayList<Utilisateur> membres) {
+        this.ID = ID;
+        this.nom = nom;
+        this.membres = membres;
+    }
+    
+    public Groupe(int ID, String nom) {
+        this.ID = ID;
+        this.nom = nom;
+        this.membres = new ArrayList<>();
+    }
+    
+    public Groupe( String nom) {
+        this.ID = (int)(Math.random() * 10);
+        this.nom = nom;
+        this.membres = new ArrayList<>();
+    }
     
     public int getID() {
         return ID;
@@ -41,11 +59,21 @@ public class Groupe {
         
     }
     
-    public void ajouterMembre(Utilisateur membre) {
-        
+    public boolean ajouterMembre(Utilisateur membre) {
+        for(int i = 0; i < this.membres.size(); i++)
+            if(this.membres.get(i).getID() == membre.getID()){
+                return false;
+            }
+        this.membres.add(membre);
+        return false;
     }
     
-    public void eliminerMembre(Utilisateur membre) {
-        
+    public boolean eliminerMembre(Utilisateur membre) {
+        for(int i = 0; i < this.membres.size(); i++)
+            if(this.membres.get(i).getID() == membre.getID()){
+                this.membres.remove(membre);
+                return true;
+            }
+        return false;
     }
 }
